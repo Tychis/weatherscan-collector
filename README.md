@@ -39,31 +39,31 @@ Complete any additional steps as required for your web environment.
 ```
 Usage: php artisan [command] [options]
 
-**Command:** wscan:generateurls
+Command: wscan:generateurls
 
 Loop through the possible Environment Canada Alert ATOM feed URLs and confirm their existence. Add new items to the database as necessary.
 
-**Options:**
+Options:
 
   --province, -p [ISO_CODE]
     (OPTIONAL) Add the alerts for a single province by its ISO 3166-2:CA code. Running this command with multiple provinces will add additional provinces to scan. Leave blank to generate URLs for all provinces.  Acceptable options (case-insensitive): BC, AB, SK, MB, ON, QC, NB, NS, NL, PEI, NU, NT, YT
   --help, -h
     Show this help information.
 
-**Command:** wscan:scanalerts
+Command: wscan:scanalerts
 
 Loop through all collected ATOM feeds and update the database with current alert statuses. Will only add new entries on status change.
 
-**Options:**
+Options:
 
   --help, -h
     Show this help information.
 
-**Command:** wscan:scanalerts
+Command: wscan:scanalerts
 
 Truncate all ATOM feed URLs from the database in case you want a more restrictive set or need to regenerate the URLs for any reason.
 
-**Options:**
+Options:
 
   --help, -h
     Show this help information.
