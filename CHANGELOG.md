@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 2020-04-21
+### Added
+- Improve code commenting
+- Add catch-all to prevent exceptions and fatal errors during run-time when an unmatched alert description pattern is read
+
+### TODO
+- Optimize the cost of pulling the alerts from the ATOM feed
+- Create front end interactive interface and API feature for third party integration
+- Write documentation for scheduling
+
 ## [0.0.2] - 2020-04-21
 ### Added
 - Release a more detailed README for the project

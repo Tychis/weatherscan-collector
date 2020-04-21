@@ -54,7 +54,7 @@ class ScanAlerts extends Command
         // Get a collection of the URLs
         $urls = XMLSearchURLs::get();
         $this->info('Beginning Environment Canada Alerts Scan!');
-        // Create progress bar for the CLI
+        // Create progress bar for the CLI, which inform the task administrator of the time elapsed, items complete, alerts identified and total items in real time
         $progBar = $this->output->createProgressBar(count($urls));
         $progBar->setFormat(' %current%/%max% [%bar%] %percent:3s%% || Elapsed: %elapsed:6s% || %message%');
         $progBar->setMessage("Alerts: 0");
@@ -107,21 +107,25 @@ class ScanAlerts extends Command
             $issue_date = $item->get_date();
             $alert_id = AlertDict::where('alert_title', $alert_array[0])->value('id'); // We don't want to make constant round trips to the database, but there is an issue with the resulting array when we take action on the Collection , so this is a temporary solution
             $location_id = Locations::where('location_name', trim($alert_array[1]))->value('id'); // We don't want to make constant round trips to the database, but there is an issue with the resulting array when we take action on the Collection, so this is a temporary solution
-            // Add the current alert to the history
+            // Add the current alert to the history, but only if it doesn't already exist. TODO: Find opportunities to reduce cost by not making a round trip to the database
             if(AlertHistory::where(['alert_id' => $alert_id, 'location_id' => $location_id, 'issue_datetime' => Carbon::parse($issue_date)])->count() == 0) {
                 $hist = new AlertHistory;
                 $hist->alert_id = $alert_id;
-                $hist->location_id = $location_id;
+                $hist->location_id = $location_id
+                // Carbon automatically recognizes and produces an SQL safe format for the database
                 $hist->issue_datetime = Carbon::parse($issue_date);
                 $hist->save();
             }
+            // Increment the count of Alerts passed back to the CLI
             if ($item->get_content() != "No alerts in effect") {
                 $alerts++;
                 $progBar->setMessage("Alerts: $alerts");
             }
+            // Advance the progress bar
             $progBar->advance();
             endfor;
         }
+        // The task is complete, so we've reached 100%, notify the task administrator
         $progBar->finish();
         $this->info('Scan completed');
     }
@@ -130,21 +134,31 @@ class ScanAlerts extends Command
     {
         //TODO: Improve and optimize. This may not capture all possibilities.
         if(Str::contains($str, 'No alerts in effect') == True) {
+            // Make sure we just record this as a "statement" as there is nothing going on
             $response = Arr::add(['alert_type' => 'Statement', 'state' => 2], 'alert_type', 'Statement');
         } elseif(Str::contains($str, 'IN EFFECT') == True) {
+            // Make sure we properly categorize active alerts with the phrases `WARNING`, `WATCH`, and `STATEMENT` in the database
             if(Str::contains($str, 'WARNING') == True) {
                 $response = Arr::add(['alert_type' => 'Warning', 'state' => 1], 'alert_type', 'Warning');
             } elseif(Str::contains($str, 'WATCH') == True) {
                 $response = Arr::add(['alert_type' => 'Watch', 'state' => 1], 'alert_type', 'Watch');
             } elseif(Str::contains($str, 'STATEMENT') == True) {
                 $response = Arr::add(['alert_type' => 'Statement', 'state' => 2], 'alert_type', 'Statement');
+            } else {
+                $response = Arr::add(['alert_type' => 'Other', 'state' => 2], 'alert_type',  'Other');
             }
         } elseif(Str::contains($str, 'ENDED') == True) {
+            // Make sure we properly categorize recently terminated alerts with the phrases `WARNING`, `WATCH`, and `STATEMENT` in the database
             if(Str::contains($str, 'WARNING') == True) {
                 $response = Arr::add(['alert_type' => 'Warning', 'state' => 0], 'alert_type',  'Warning');
             } elseif(Str::contains($str, 'WATCH') == True) {
                 $response = Arr::add(['alert_type' => 'Watch', 'state' => 0], 'alert_type', 'Watch');
+            } else {
+                $response = Arr::add(['alert_type' => 'Statement', 'state' => 2], 'alert_type', 'Statement');
             }
+        } else {
+            // Catch all if anything else appears that we haven't experienced before
+            $response = Arr::add(['alert_type' => 'Other', 'state' => 2], 'alert_type',  'Other');
         }
         return $response;
     }

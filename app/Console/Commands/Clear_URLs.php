@@ -43,6 +43,7 @@ class Clear_URLs extends Command
     {
         $this->comment('Truncating Environment Canada Alerts URL List...');
         try {
+            // Very simple truncation of the entire table so we can start from scratch
             XMLSearchURLs::truncate();
         } catch (Throwable $e) {
             report($e);
