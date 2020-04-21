@@ -14,7 +14,7 @@ class ScanAlerts extends Command
      *
      * @var string
      */
-    protected $signature = 'wscan:scan';
+    protected $signature = 'wscan:scanalerts';
 
     /**
      * The console command description.

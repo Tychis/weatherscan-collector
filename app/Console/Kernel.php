@@ -13,8 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\Generate_AlertXML_URLs::class,
-        Commands\ScanAlerts::class,
+        // Commands are auto discovered
     ];
 
     /**
@@ -25,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('wscan:scanalerts')->everyFiveMinutes();
     }
 
     /**
