@@ -111,7 +111,7 @@ class ScanAlerts extends Command
             if(AlertHistory::where(['alert_id' => $alert_id, 'location_id' => $location_id, 'issue_datetime' => Carbon::parse($issue_date)])->count() == 0) {
                 $hist = new AlertHistory;
                 $hist->alert_id = $alert_id;
-                $hist->location_id = $location_id
+                $hist->location_id = $location_id;
                 // Carbon automatically recognizes and produces an SQL safe format for the database
                 $hist->issue_datetime = Carbon::parse($issue_date);
                 $hist->save();
