@@ -10,6 +10,8 @@ Please review the [CHANGELOG](https://github.com/Tychis/weatherscan/blob/master/
 
 Please review Laravel's official installation guide for server requirements to ensure you meet the base requirements. An installer which automates these checks is planned in the future. [Laravel Installation Documentation](https://laravel.com/docs/7.x/installation)
 
+For maximum functionality, this project requires [Redis](https://redis.io/), [Laravel Echo Server](https://github.com/tlaverdure/laravel-echo-server), and utilizes [Socket.IO](https://socket.io/). To have a quickstart on localhost, consider using [Laravel Homestead](https://laravel.com/docs/7.x/homestead) or a similar platform, which pre-installs Redis and NodeJS in the container.
+
 Clone the repository
 
     git clone git@github.com:Tychis/weatherscan.git
@@ -33,6 +35,14 @@ Run the database migrations to generate the required database tables **after** s
     php artisan migrate
 
 Complete any additional steps as required for your web environment.
+
+### Additional Steps (Optional)
+
+If installing with intent to use the real-time sockets, you must also run the following commands from the project folder (NodeJS required):
+
+    npm install
+
+If using Laravel Homestead on Windows, please add **--no-bin-links** to your commands to avoid any issues with generating symlinks.    
 
 ### Usage and Completing Installation
 
@@ -69,6 +79,22 @@ Options:
     Show this help information.
 
 ```
+
+## Resolving Possible Issues
+
+### Laravel-Echo-Server Installation
+
+If you install Laravel Echo Server globally with NPM and still cannot launch the server with
+
+    laravel-echo-server init
+
+Change the command to:
+
+    npx laravel-echo-server init
+
+## Credits
+
+[How to Use Laravel with Socket.IO](https://laravel-recipes.com/how-to-use-laravel-with-socket-io/)
 
 ## License
 
