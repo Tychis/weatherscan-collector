@@ -46,6 +46,7 @@ window.io = require('socket.io-client');// Have this in case you stop running yo
   window.Echo = new Echo({
     broadcaster: 'socket.io',
     host: window.location.hostname + ':6001',
+    transports: ['websocket'],
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
