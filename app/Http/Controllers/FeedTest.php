@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AlertHistory;
 
 class FeedTest extends Controller
 {
+    public function home() {
+        return view('home');
+    }
+
+    public function test2() {
+        $alert = AlertHistory::get();
+        event(new \App\Events\AlertsUpdated($alert));
+    }
+
     public function FeedTest() {
       $feed = \FeedReader::read('https://weather.gc.ca/rss/battleboard/on30_e.xml');
       $location_title = str_replace("- Weather Alert - Environment Canada", "", $feed->get_title());
