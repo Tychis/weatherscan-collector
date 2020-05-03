@@ -44,6 +44,10 @@ If installing with intent to use the real-time sockets, you must also run the fo
 
 If using Laravel Homestead on Windows, please add **--no-bin-links** to your commands to avoid any issues with generating symlinks.    
 
+When ready to start, run this command or add it to Supervisor:
+
+    npx laravel-echo-server start
+
 ### Usage and Completing Installation
 
 ```
