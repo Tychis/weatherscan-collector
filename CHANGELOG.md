@@ -6,9 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.1] - 2020-05-03
+## [0.1.2] - 2020-05-05
 
 ### Added
+
+- Add one-to-one relationships from the alert history to the alert type and locations
+- Centralize initial landing page in new controller
+
+### Changed
+
+- Add all current observed alerts to landing page
+- Clean up demo VUE object
+- Change "AlertDict" to "AlertType" for better clarity
 
 ## [0.1.0] - 2020-05-03
 ### Added
