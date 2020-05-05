@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'FeedTest@home');
+Route::get('/', 'Web\MainController@EntryPage');
 
-Route::get('test', 'FeedTest@test2');
+Route::get('test', 'Web\FeedTest@test2');

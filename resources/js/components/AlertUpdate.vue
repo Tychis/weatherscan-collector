@@ -1,20 +1,16 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">Vue - Websocket Demo</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        Current Status
                         <template v-for="alert in alerts">
                           {{alert.issue_datetime}}
                         </template>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </template>
 
 <script>

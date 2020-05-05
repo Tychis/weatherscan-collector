@@ -10,4 +10,9 @@ class Locations extends Model
     public $timestamps = false;
 
     protected $fillable = ['location_name', 'province'];
+
+    public function Alert_History()
+    {
+        return $this->belongsTo('App/Models/AlertHistory');
+    }
 }

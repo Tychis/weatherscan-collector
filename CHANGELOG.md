@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2020-05-03
+
+### Added
+
+## [0.1.0] - 2020-05-03
+### Added
+- Add Vue.JS to front end
+- Install Laravel Echo Server
+- Implement Socket.IO
+- Add demo Vue component with dynamic updating to test proof of concept on live server
+
 ## [0.0.3a] - 2020-04-21
 ### Changed
 - Fixed a missed semi-colon and failed test due to working at 0200
