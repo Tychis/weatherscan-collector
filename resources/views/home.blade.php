@@ -27,8 +27,7 @@
                     </div>
                     <show-alerts></show-alerts>
                 </div>
-        </div>
-            <show-alerts></show-alerts>
+            </div>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
     </body>

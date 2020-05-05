@@ -6,12 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4] - 2020-05-05
+
+### Added
+
+- Properly set distinct and latest record on the current alerts collection to ensure we don't end up with every historical alert
+
+### Changed
+
+- Remove extra rendering of the real time alerts VUE component
+
 ## [0.1.2] - 2020-05-05
 
 ### Added
 
 - Add one-to-one relationships from the alert history to the alert type and locations
 - Centralize initial landing page in new controller
+- Add seeder with base "No alerts in effect" so we can simplify the initial logic
 
 ### Changed
 

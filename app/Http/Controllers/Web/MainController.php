@@ -16,7 +16,7 @@ class MainController extends Controller
      */
     public function EntryPage()
     {
-        $alerts = AlertHistory::with(['alert_type', 'alert_location'])->where('alert_id', '!=', 1)->get();
+        $alerts = AlertHistory::with(['alert_type', 'alert_location'])->where('alert_id', '!=', 1)->latest()->distinct('location_id')->get();
         return view('home', compact('alerts'));
     }
 }
