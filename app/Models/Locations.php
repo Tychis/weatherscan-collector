@@ -15,4 +15,9 @@ class Locations extends Model
     {
         return $this->belongsTo('App/Models/AlertHistory');
     }
+
+    public function Current_Conditions()
+    {
+        return $this->belongsTo('App/Models/CurrentConditions');
+    }
 }
