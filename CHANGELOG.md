@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5] - 2020-05-05
+
+### Added
+
+- In order to optimize memory usage, a current conditions table has been added so only a few hundred results need to be read when looking for current conditions (instead of thousands, or tens of thousands)
+
+### Changed
+
+- Modify the Scan Alerts command to only parse the date into a Carbon object the first time, then use the object instead of parsing it repeatedly
+
 ## [0.1.4] - 2020-05-05
 
 ### Added

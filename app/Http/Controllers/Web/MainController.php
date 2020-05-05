@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\AlertHistory;
+use App\Models\CurrentConditions;
 
 class MainController extends Controller
 {
@@ -16,7 +16,7 @@ class MainController extends Controller
      */
     public function EntryPage()
     {
-        $alerts = AlertHistory::with(['alert_type', 'alert_location'])->where('alert_id', '!=', 1)->latest()->distinct('location_id')->get();
+        $alerts = CurrentConditions::with(['alert_type', 'alert_location'])->where('alert_id', '!=', 1)->get();
         return view('home', compact('alerts'));
     }
 }

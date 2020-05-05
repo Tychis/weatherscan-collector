@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\{Collection, Arr, Str};
-use App\Models\{XMLSearchURLs, Locations, AlertType, AlertHistory};
+use App\Models\{XMLSearchURLs, Locations, AlertType, AlertHistory, CurrentConditions};
 use Carbon\Carbon;
 
 class ScanAlerts extends Command
@@ -104,17 +104,18 @@ class ScanAlerts extends Command
                 }
             }
             // Get the "issue date" from the collection
-            $issue_date = $item->get_date();
+            $issue_date = Carbon::parse($item->get_date());
             $alert_id = AlertType::where('alert_title', $alert_array[0])->value('id'); // We don't want to make constant round trips to the database, but there is an issue with the resulting array when we take action on the Collection , so this is a temporary solution
             $location_id = Locations::where('location_name', trim($alert_array[1]))->value('id'); // We don't want to make constant round trips to the database, but there is an issue with the resulting array when we take action on the Collection, so this is a temporary solution
             // Add the current alert to the history, but only if it doesn't already exist. TODO: Find opportunities to reduce cost by not making a round trip to the database
-            if(AlertHistory::where(['alert_id' => $alert_id, 'location_id' => $location_id, 'issue_datetime' => Carbon::parse($issue_date)])->count() == 0) {
+            if(AlertHistory::where(['alert_id' => $alert_id, 'location_id' => $location_id, 'issue_datetime' => $issue_date])->count() == 0) {
                 $hist = new AlertHistory;
                 $hist->alert_id = $alert_id;
                 $hist->location_id = $location_id;
                 // Carbon automatically recognizes and produces an SQL safe format for the database
-                $hist->issue_datetime = Carbon::parse($issue_date);
+                $hist->issue_datetime = $issue_date;
                 $hist->save();
+                $current = CurrentConditions::updateOrCreate(['location_id' => $location_id], ['alert_id' => $alert_id, 'issue_datetime' => $issue_date]);
             }
             // Increment the count of Alerts passed back to the CLI
             if ($item->get_content() != "No alerts in effect") {
