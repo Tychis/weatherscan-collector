@@ -17,6 +17,6 @@ class CurrentConditions extends Model
 
     public function alert_location()
     {
-        return $this->hasOne('App\Models\Locations', 'id', 'location_id');
+        return $this->hasOne('App\Models\Locations', 'id', 'location_id')->orderBy('province', 'desc');
     }
 }

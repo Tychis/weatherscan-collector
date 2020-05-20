@@ -43,6 +43,7 @@ class ScanAlerts extends Command
         // Create a collection of alerts from `alert_dict` and locations from `locations`
         $alert_dictionary = AlertType::get();
         $locations = Locations::get();
+        $current = array();
         // This will be used to track the number of alerts in the scanned zones
         $alerts = 0;
         $this->comment('Checking that we have URLs to scan...');
@@ -56,7 +57,7 @@ class ScanAlerts extends Command
         $this->info('Beginning Environment Canada Alerts Scan!');
         // Create progress bar for the CLI, which inform the task administrator of the time elapsed, items complete, alerts identified and total items in real time
         $progBar = $this->output->createProgressBar(count($urls));
-        $progBar->setFormat(' %current%/%max% [%bar%] %percent:3s%% || Elapsed: %elapsed:6s% || %message%');
+        $progBar->setFormat('%current%/%max% [%bar%] %percent:3s%% || Elapsed: %elapsed:6s% || %message%');
         $progBar->setMessage("Alerts: 0");
         $progBar->start();
         // Loop through URL collection
@@ -115,7 +116,7 @@ class ScanAlerts extends Command
                 // Carbon automatically recognizes and produces an SQL safe format for the database
                 $hist->issue_datetime = $issue_date;
                 $hist->save();
-                $current = CurrentConditions::updateOrCreate(['location_id' => $location_id], ['alert_id' => $alert_id, 'issue_datetime' => $issue_date]);
+                $current[] = CurrentConditions::updateOrCreate(['location_id' => $location_id], ['alert_id' => $alert_id, 'issue_datetime' => $issue_date]);
             }
             // Increment the count of Alerts passed back to the CLI
             if ($item->get_content() != "No alerts in effect") {
@@ -128,7 +129,18 @@ class ScanAlerts extends Command
         }
         // The task is complete, so we've reached 100%, notify the task administrator
         $progBar->finish();
+        self::cleanAlerts($current);
         $this->info('Scan completed');
+    }
+
+    private static function cleanAlerts($new_state)
+    {
+        $current_state = AlertHistory::where('alert_id', '!=', 1)->select('id', 'location_id', 'alert_id', 'issue_datetime')->get();
+        $difference = $current_state->diffAssoc($new_state);
+        foreach($difference as $diff) {
+            // When the alert has been terminated, we don't receive anything for each individual town/city within a given county other than an alert ended statement. At the county level, the status is changed to "No alerts in effect". In a future version, this may be automated, however, for now, we will remove the old statuses when they are removed from the XML.
+            CurrentConditions::where(['id' => $diff->id])->update(['alert_id' => 1]);
+        }
     }
 
     private static function defineAlertType($str)
