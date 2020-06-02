@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.8] - 2020-06-01
+
+### Added
+
+- Switch Eloquent queries to Repositories to improve code quality and elegance
+- Implement Sentry
+
 ## [0.1.7] - 2020-05-19
 
 ### Fixed
