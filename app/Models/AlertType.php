@@ -13,11 +13,11 @@ class AlertType extends Model
 
     public function Alert_History()
     {
-        return $this->belongsTo('App/Models/AlertHistory');
+        return $this->belongsTo('App\Models\AlertHistory');
     }
 
     public function Current_Conditions()
     {
-        return $this->belongsTo('App/Models/CurrentConditions');
+        return $this->belongsTo('App\Models\CurrentConditions');
     }
 }
