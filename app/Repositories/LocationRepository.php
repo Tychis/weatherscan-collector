@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Locations;
 
-class LocationsRepository implements LocationsInterface
+class LocationRepository implements LocationInterface
 {
     /**
      * {@inheritdoc}

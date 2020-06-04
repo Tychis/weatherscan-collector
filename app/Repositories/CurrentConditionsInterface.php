@@ -15,4 +15,10 @@ interface CurrentConditionsInterface
      * @return mixed
      */
     public function getAlerts();
+
+    /**
+     * Get the IDs of the alerts in the Current Conditions index, only, for comparison
+     * @return mixed
+     */
+    public function getAlertIDsOnly();
 }

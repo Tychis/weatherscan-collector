@@ -14,8 +14,19 @@ class CurrentConditionsRepository implements CurrentConditionsInterface
         return CurrentConditions::select('id', 'alert_id', 'location_id', 'issue_datetime')->get();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAlerts()
     {
         return CurrentConditions::where('alert_id', '!=', 1)->select('id', 'alert_id', 'location_id', 'issue_datetime')->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlertIDsOnly()
+    {
+        return CurrentConditions::where('alert_id', '!=', 1)->select('id')->get();
     }
 }

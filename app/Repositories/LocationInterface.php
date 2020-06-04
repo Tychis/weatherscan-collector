@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface LocationsInterface
+interface LocationInterface
 {
     /**
      * Get all known locations

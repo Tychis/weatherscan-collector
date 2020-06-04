@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### TODO
+
+- Implement de-duplication script to clean existing database safely
+- Work on front end UI interface
+- Implement alert system via notifications (SMS, other to be determined)
+- Improve scan system and clean up code
+
+## [0.2.0] - 2020-06-04
+
+### Added
+
+- Add Counties table and implement relationship to each location for better data management
+- Implement foreign keys
+
+### Fixed
+
+- Fixed data duplication issue resulting in a copy of every alert history being created each time the cron ran
+
+### Changed
+
+- Change the naming of LocationsInterface/LocationsRepository to be standardized with the County repository
+
 ## [0.1.8] - 2020-06-01
 
 ### Added

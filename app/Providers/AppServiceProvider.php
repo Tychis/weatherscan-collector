@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\{AlertHistoryInterface, AlertHistoryRepository, AlertTypeInterface, AlertTypeRepository, ATOMUrlsInterface, ATOMUrlsRepository, CurrentConditionsInterface, CurrentConditionsRepository, LocationsInterface, LocationsRepository};
+use App\Repositories\{AlertHistoryInterface, AlertHistoryRepository, AlertTypeInterface, AlertTypeRepository, ATOMUrlsInterface, ATOMUrlsRepository, CurrentConditionsInterface, CurrentConditionsRepository, LocationInterface, LocationRepository, CountyInterface, CountyRepository};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(AlertTypeInterface::class, AlertTypeRepository::class);
         $this->app->singleton(ATOMUrlsInterface::class, ATOMUrlsRepository::class);
         $this->app->singleton(CurrentConditionsInterface::class, CurrentConditionsRepository::class);
-        $this->app->singleton(LocationsInterface::class, LocationsRepository::class);
+        $this->app->singleton(LocationInterface::class, LocationRepository::class);
+        $this->app->singleton(CountyInterface::class, CountyRepository::class);
     }
 
     /**
