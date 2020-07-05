@@ -8,10 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### TODO
 
-- Implement de-duplication script to clean existing database safely
-- Work on front end UI interface
+- Implement front end UI interface via external application (React or Flutter TBD)
 - Implement alert system via notifications (SMS, other to be determined)
 - Improve scan system and clean up code
+- Implement messaging queue architecture
+
+## [1.0.0] - 2020-07-05
+
+### Changed
+
+- Convert project into Lumen micro-service architecture
+- Transform existing console interface to 'Activescan', solely responsible for analyzing weather alerts and other future data
+
+### Added
+
+- Docker file to initalize an Nginx+Alpine and mariadb infrastructure in a server or local Docker implementation
 
 ## [0.2.0] - 2020-06-04
 

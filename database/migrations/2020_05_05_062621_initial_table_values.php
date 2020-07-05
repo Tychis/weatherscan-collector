@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
 
 class InitialTableValues extends Migration
 {
@@ -26,6 +27,6 @@ class InitialTableValues extends Migration
      */
     public function down()
     {
-        
+
     }
 }

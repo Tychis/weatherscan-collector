@@ -5,8 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\{Collection, Arr, Str};
 use App\Models\{XMLSearchURLs, Locations, AlertType, AlertHistory, CurrentConditions, Counties};
-use App\Repositories\{AlertHistoryInterface, AlertHistoryRepository, AlertTypeInterface, ATOMUrlsInterface, CurrentConditionsInterface, LocationInterface, CountyInterface};
+use App\Repositories\{AlertHistoryInterface, AlertTypeInterface, ATOMUrlsInterface, CurrentConditionsInterface, LocationInterface, CountyInterface};
 use Carbon\Carbon;
+use Vedmant\FeedReader\Facades\FeedReader;
 
 class ScanAlerts extends Command
 {
@@ -80,7 +81,7 @@ class ScanAlerts extends Command
         // Loop through URL collection
         foreach ($urls as $url) {
             // Individual URL of the XML feed
-            $feed = \FeedReader::read($url->url);
+            $feed = FeedReader::read($url->url);
             // Start a loop parser through the XML collection
             $max = $feed->get_item_quantity();
             for ($x = 0; $x < $max; $x++):
