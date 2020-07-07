@@ -1,4 +1,4 @@
-# WeatherScan - Base Data Collection Engine ![WeatherScan Icon](public/img/tornado-icon.png)
+# WeatherScan - Canadian Weather Alert Collection Engine ![WeatherScan Icon](public/img/tornado-icon.png)
 
 > ### Hobby project built with Lumen to pull Environment Canada weather watches/warnings ATOM feed data into a local database and maintain a history of events, including Severe Thunderstorms, Warned Tornado Storms, Snowfall Warnings and more.
 
