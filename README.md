@@ -1,6 +1,6 @@
-# WeatherScan ![WeatherScan Icon](public/img/tornado-icon.png)
+# WeatherScan - Base Data Collection Engine ![WeatherScan Icon](public/img/tornado-icon.png)
 
-> ### Hobby project built with Laravel to pull Environment Canada weather watches/warnings ATOM feed data into a local database and maintain a history of events, including Severe Thunderstorms, Warned Tornado Storms, Snowfall Warnings and more.
+> ### Hobby project built with Lumen to pull Environment Canada weather watches/warnings ATOM feed data into a local database and maintain a history of events, including Severe Thunderstorms, Warned Tornado Storms, Snowfall Warnings and more.
 
 Please review the [CHANGELOG](https://github.com/Tychis/weatherscan/blob/master/CHANGELOG.md) for current changes and known issues. PRs, issues and feedback welcome!
 
@@ -8,9 +8,15 @@ Please review the [CHANGELOG](https://github.com/Tychis/weatherscan/blob/master/
 
 ## Installation - Preparing the Framework
 
-Please review Laravel's official installation guide for server requirements to ensure you meet the base requirements. An installer which automates these checks is planned in the future. [Laravel Installation Documentation](https://laravel.com/docs/7.x/installation)
+Please review Laravel's official installation guide for server requirements to ensure you meet the base requirements. An installer which automates these checks is planned in the future. [Laravel Installation Documentation](https://lumen.laravel.com/docs/7.x)
 
-For maximum functionality, this project requires [Redis](https://redis.io/), [Laravel Echo Server](https://github.com/tlaverdure/laravel-echo-server), and utilizes [Socket.IO](https://socket.io/). To have a quickstart on localhost, consider using [Laravel Homestead](https://laravel.com/docs/7.x/homestead) or a similar platform, which pre-installs Redis and NodeJS in the container.
+To have a quickstart on localhost, consider using [Laravel Homestead](https://laravel.com/docs/7.x/homestead) or a similar platform, which pre-installs Redis and NodeJS in the container.
+
+If you're comfortable with Docker, this project also supports [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/), and can be initialized using
+
+    docker-compose up -d
+
+The Docker container includes [Alpine Linux](https://alpinelinux.org/about/), [NGINX](https://www.nginx.com/), [PHP](https://www.php.net/) and [MariaDB](https://mariadb.org/) to provide excellent performance and a low container footprint. This container can be launched using [Container Optimized OS](https://cloud.google.com/container-optimized-os/docs) on GCP or any lightweight O/S of your choice such as [Fedora CoreOS](https://getfedora.org/coreos/).
 
 Clone the repository
 
@@ -22,31 +28,15 @@ Install the required dependencies using composer
 
     composer install
 
-Copy .env.example and update your SQL configuration with your server's requirements. This will be streamlined in the future with an installer.
+Copy .env.example and update your SQL configuration with your server's requirements.
 
     cp .env.example .env
-
-Generate your new application key to ensure a unique _**APP_KEY**_ is generated
-
-    php artisan key:generate
 
 Run the database migrations to generate the required database tables **after** setting your database configuration in _**.env**_
 
     php artisan migrate
 
 Complete any additional steps as required for your web environment.
-
-### Additional Steps (Optional)
-
-If installing with intent to use the real-time sockets, you must also run the following commands from the project folder (NodeJS required):
-
-    npm install
-
-If using Laravel Homestead on Windows, please add **--no-bin-links** to your commands to avoid any issues with generating symlinks.    
-
-When ready to start, run this command or add it to Supervisor:
-
-    npx laravel-echo-server start
 
 ### Usage and Completing Installation
 
@@ -84,21 +74,9 @@ Options:
 
 ```
 
-## Resolving Possible Issues
+### Optional Services
 
-### Laravel-Echo-Server Installation
-
-If you install Laravel Echo Server globally with NPM and still cannot launch the server with
-
-    laravel-echo-server init
-
-Change the command to:
-
-    npx laravel-echo-server init
-
-## Credits
-
-[How to Use Laravel with Socket.IO](https://laravel-recipes.com/how-to-use-laravel-with-socket-io/)
+If you already use [Sentry](https://sentry.io/) for bug collection, place your DSN URL in the "SENTRY_DSN" line at the end of the .env, which will automatically enable remote error logging.
 
 ## License
 
