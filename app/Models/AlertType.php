@@ -9,6 +9,11 @@ class AlertType extends Model
     protected $table = 'alert_dict';
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['alert_title', 'alert_type', 'state'];
 
     public function Alert_History()

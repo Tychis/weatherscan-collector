@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve scan system and clean up code
 - Implement messaging queue architecture
 
+## [1.0.2] - 2020-07-07
+
+### Changed
+
+- Remove extra semi-colon from the service provider
 
 ## [1.0.1] - 2020-07-07
 

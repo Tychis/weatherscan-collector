@@ -9,6 +9,11 @@ class Counties extends Model
     protected $table = 'counties';
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['county_name'];
 
     public function Location()

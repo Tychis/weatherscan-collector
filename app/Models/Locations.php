@@ -9,6 +9,11 @@ class Locations extends Model
     protected $table = 'locations';
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['location_name', 'province', 'county_id', 'is_county'];
 
     public function Alert_History()

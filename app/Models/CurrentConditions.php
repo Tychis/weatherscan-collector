@@ -8,6 +8,11 @@ class CurrentConditions extends Model
 {
     protected $table = 'current_conditions';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['alert_id', 'location_id', 'issue_datetime'];
 
     public function alert_type()

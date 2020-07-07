@@ -8,6 +8,11 @@ class AlertHistory extends Model
 {
     protected $table = 'alert_history';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['alert_id', 'location_id', 'issue_datetime'];
 
     public function alert_type()
