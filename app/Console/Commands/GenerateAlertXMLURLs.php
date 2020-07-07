@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use App\Models\XMLSearchURLs;
 
-class Generate_AlertXML_URLs extends Command
+class GenerateAlertXMLURLs extends Command
 {
     /**
      * The name and signature of the console command.

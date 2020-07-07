@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve scan system and clean up code
 - Implement messaging queue architecture
 
+
+## [1.0.1] - 2020-07-07
+
+### Changed
+
+- Standardized the class names of the Commands in UpperCamelCase
+- Fix a missing CURL library in the Docker file
+
 ## [1.0.0] - 2020-07-05
 
 ### Changed

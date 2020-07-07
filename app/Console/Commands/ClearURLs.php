@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use App\Models\XMLSearchURLs;
 
-class Clear_URLs extends Command
+class ClearURLs extends Command
 {
     /**
      * The name and signature of the console command.

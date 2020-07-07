@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     libzip-dev \
+    libcurl4-openssl-dev \
     curl
 
 # Clear cache

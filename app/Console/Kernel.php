@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\Clear_URLs::class,
-        Commands\Generate_AlertXML_URLs::class,
+        Commands\ClearURLs::class,
+        Commands\GenerateAlertXMLURLs::class,
         Commands\ScanAlerts::class,
     ];
 
